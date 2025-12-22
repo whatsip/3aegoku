@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>AquaVista | Aquarium Tank Showroom</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --dark-blue: #0f1c2e;
+  --blue-grey: #1e2a3a;
+  --light-grey: #e6e9ef;
+  --white: #ffffff;
+  --accent: #3fa9f5;
+}
+
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--dark-blue);
+  color: var(--light-grey);
+  line-height: 1.6;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* HEADER */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(15, 28, 46, 0.9);
+  backdrop-filter: blur(10px);
+}
+.navbar {
+  max-width: 1200px;
+  margin: auto;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--white);
+}
+nav a {
+  color: var(--light-grey);
+  text-decoration: none;
+  margin-left: 24px;
+  font-weight: 500;
+  transition: color .3s;
+}
+nav a:hover {
+  color: var(--accent);
+}
+
+/* HERO SLIDER */
+.hero {
+  position: relative;
+  height: 70vh;
+  overflow: hidden;
+}
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+.slide.active {
+  opacity: 1;
+}
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(15,28,46,.3), rgba(15,28,46,.9));
+}
+.hero-text {
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  max-width: 800px;
+}
+.hero-text h1 {
+  font-size: clamp(28px, 5vw, 48px);
+  color: var(--white);
+  margin-bottom: 16px;
+}
+.hero-text p {
+  font-size: 18px;
+  opacity: .9;
+}
+
+/* SECTION */
+section {
+  max-width: 1200px;
+  margin: auto;
+  padding: 80px 16px;
+}
+section h2 {
+  font-size: 32px;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+section p.subtitle {
+  max-width: 600px;
+  opacity: .8;
+  margin-bottom: 48px;
+}
+
+/* GALLERY */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+.gallery-item {
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--blue-grey);
+  transition: transform .4s, box-shadow .4s;
+}
+.gallery-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,.4);
+}
+.gallery-item img {
+  height: 240px;
+  width: 100%;
+  object-fit: cover;
+}
+.gallery-item div {
+  padding: 16px;
+}
+.gallery-item h3 {
+  font-size: 18px;
+  color: var(--white);
+}
+
+/* BLOG */
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+.blog-card {
+  background: var(--blue-grey);
+  border-radius: 12px;
+  padding: 24px;
+  transition: transform .3s;
+}
+.blog-card:hover {
+  transform: translateY(-6px);
+}
+.blog-card h3 {
+  color: var(--white);
+  margin-bottom: 12px;
+}
+.blog-card p {
+  font-size: 15px;
+  opacity: .85;
+}
+
+/* FOOTER */
+footer {
+  background: #0b1524;
+  padding: 60px 16px 30px;
+}
+.footer-grid {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 32px;
+}
+footer h4 {
+  color: var(--white);
+  margin-bottom: 16px;
+}
+footer p, footer a {
+  font-size: 14px;
+  opacity: .8;
+  color: var(--light-grey);
+  text-decoration: none;
+}
+.footer-bottom {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 13px;
+  opacity: .5;
+}
+
+/* REVEAL EFFECT */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1s ease;
+}
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  nav {
+    display: none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="navbar">
+    <div class="logo">AquaVista</div>
+    <nav>
+      <a href="#showroom">Showroom</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="slide active"><img src="https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13"></div>
+  <div class="slide"><img src="https://images.unsplash.com/photo-1503602642458-232111445657"></div>
+  <div class="slide"><img src="https://images.unsplash.com/photo-1504712598893-24159a89200e"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-text">
+    <h1>Premium Aquarium Tank Showroom</h1>
+    <p>Where design, craftsmanship and aquatic beauty meet.</p>
+  </div>
+</div>
+
+<!-- SHOWROOM -->
+<section id="gallery" class="reveal">
+  <h2>Signature Aquariums</h2>
+  <p class="subtitle">A curated collection of custom-built aquarium tanks designed for elegance and balance.</p>
+
+  <div class="gallery">
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1533055640609-24b498cdf05d">
+      <div><h3>Minimal Reef Tank</h3></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1544551763-ced84a30e8c4">
+      <div><h3>Nature Planted Style</h3></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1611171711916-3f28f2f63b12">
+      <div><h3>Luxury Marine Display</h3></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e">
+      <div><h3>Modern Living Space Tank</h3></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="reveal">
+  <h2>Sharing Experience</h2>
+  <p class="subtitle">Insights, stories and philosophy behind creating timeless aquarium spaces.</p>
+
+  <div class="blog-grid">
+    <div class="blog-card">
+      <h3>The Art of Aquascaping</h3>
+      <p>Understanding composition, depth, and harmony in aquatic environments.</p>
+    </div>
+    <div class="blog-card">
+      <h3>Choosing the Right Tank</h3>
+      <p>Design considerations for home, office and commercial spaces.</p>
+    </div>
+    <div class="blog-card">
+      <h3>Long-Term Aquarium Care</h3>
+      <p>Building systems that remain beautiful and balanced over time.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-grid">
+    <div>
+      <h4>AquaVista</h4>
+      <p>Professional aquarium tank design and display solutions.</p>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p>Email: info@aquavista.com</p>
+      <p>Phone: +84 000 000 000</p>
+    </div>
+    <div>
+      <h4>Location</h4>
+      <p>Vietnam</p>
+      <p>By appointment only</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2025 AquaVista. All rights reserved.
+  </div>
+</footer>
+
+<script>
+/* HERO SLIDER */
+let slides = document.querySelectorAll('.slide');
+let index = 0;
+setInterval(() => {
+  slides[index].classList.remove('active');
+  index = (index + 1) % slides.length;
+  slides[index].classList.add('active');
+}, 5000);
+
+/* SCROLL REVEAL */
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('show');
+  });
+}, { threshold: 0.2 });
+reveals.forEach(r => observer.observe(r));
+</script>
+
+</body>
+</html>
