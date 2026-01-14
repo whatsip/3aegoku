@@ -24,7 +24,7 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{
   font-family:'Space Grotesk',sans-serif;
-  background:radial-gradient(circle at top,var(--bg-soft),var(--bg-main));
+  background:transparent;
   color:var(--text-main);
   line-height:1.7;
   overflow-x:hidden;
@@ -273,20 +273,42 @@ footer p{color:var(--text-soft);font-size:14px}
 @media(max-width:768px){
   nav{display:none}
 }
+
+/* VIDEO BACKGROUND */
+.video-bg{
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  overflow:hidden;
+}
+
+.video-bg video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.video-overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.7); /* 70% black layer */
+  z-index:1;
+}
+  
 </style>
 </head>
 
 <body>
 
-<!-- Bubble Background -->
-<div class="bubbles">
-  <div class="bubble" style="left:5%;width:14px;height:14px;animation-duration:18s"></div>
-  <div class="bubble" style="left:15%;width:22px;height:22px;animation-duration:24s"></div>
-  <div class="bubble" style="left:35%;width:10px;height:10px;animation-duration:20s"></div>
-  <div class="bubble" style="left:55%;width:26px;height:26px;animation-duration:30s"></div>
-  <div class="bubble" style="left:75%;width:18px;height:18px;animation-duration:22s"></div>
-  <div class="bubble" style="left:90%;width:12px;height:12px;animation-duration:19s"></div>
+<!-- VIDEO BACKGROUND -->
+<div class="video-bg">
+  <video autoplay muted loop playsinline>
+    <source src="bg_video.mp4" type="video/mp4">
+  </video>
+  <div class="video-overlay"></div>
 </div>
+
+<!-- Bubble Background -->
 
 <header>
   <div class="nav">
