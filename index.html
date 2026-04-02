@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="3AE Space Lab — Thiết kế và thi công hồ thủy sinh nghệ thuật theo yêu cầu." />
+  <title>3AE SPACE LAB</title>
+
+  <!-- ── Google Fonts ── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Kings&family=Montserrat:wght@300;400;500;600;700;800&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+
+  <!-- ── CSS: Design system & utilities ── -->
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/cursor.css" />
+  <link rel="stylesheet" href="css/header.css" />
+  <link rel="stylesheet" href="css/hero.css" />
+  <link rel="stylesheet" href="css/slider.css" />
+  <link rel="stylesheet" href="css/slider43.css" />
+  <link rel="stylesheet" href="css/dual-box.css" />
+  <link rel="stylesheet" href="css/about.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <link rel="stylesheet" href="css/lightbox.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════
+       OCEAN CANVAS (fixed bg behind everything)
+  ═══════════════════════════════════════ -->
+  <canvas id="oceanCanvas" aria-hidden="true"></canvas>
+
+  <!-- ═══════════════════════════════════════
+       CUSTOM CURSOR
+  ═══════════════════════════════════════ -->
+  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+  <div class="cursor-cross" id="cursorCross" aria-hidden="true"></div>
+  <div class="cursor-ring" id="cursorRing" aria-hidden="true">
+    <span class="cursor-ring-tr"></span>
+    <span class="cursor-ring-bl"></span>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       HEADER
+  ═══════════════════════════════════════ -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <a href="#" class="logo" aria-label="Luminary Home">
+        <span class="logo-icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M14 2L26 14L14 26L2 14L14 2Z" stroke="url(#logoGrad)" stroke-width="1.5" fill="none"/>
+            <path d="M14 7L21 14L14 21L7 14L14 7Z" fill="url(#logoGrad)" opacity="0.6"/>
+            <defs>
+              <linearGradient id="logoGrad" x1="2" y1="2" x2="26" y2="26" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#7df9ff"/>
+                <stop offset="100%" stop-color="#4a9eff"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
+        <span class="logo-text">3AE-SPACELAB</span>
+      </a>
+
+      <nav class="nav-desktop" aria-label="Primary navigation">
+        <a href="#slider-section" class="nav-link">BỘ SƯU TẬP</a>
+        <a href="#gallery-services" class="nav-link">DỊCH VỤ</a>
+        <a href="#about" class="nav-link">VỀ CHÚNG TÔI</a>
+        <a href="#footer" class="nav-link nav-cta">LIÊN HỆ</a>
+      </nav>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileNav">
+        <span class="ham-line"></span>
+        <span class="ham-line"></span>
+        <span class="ham-line"></span>
+      </button>
+    </div>
+
+    <!-- Mobile Nav -->
+    <nav class="nav-mobile" id="mobileNav" aria-label="Mobile navigation" aria-hidden="true">
+      <a href="#slider-section" class="mob-link">BỘ SƯU TẬP</a>
+      <a href="#gallery-services" class="mob-link">DỊCH VỤ</a>
+      <a href="#about" class="mob-link">VỀ CHÚNG TÔI</a>
+      <a href="#footer" class="mob-link">LIÊN HỆ</a>
+    </nav>
+  </header>
+
+  <!-- ═══════════════════════════════════════
+       HERO SECTION
+  ═══════════════════════════════════════ -->
+  <section class="hero-section" id="hero" aria-label="Hero">
+    <div class="hero-bg" aria-hidden="true">
+      <div class="bg-orb bg-orb-1"></div>
+      <div class="bg-orb bg-orb-2"></div>
+      <div class="bg-grid"></div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-tagline" data-reveal="fade-up">
+        <span class="tag-pill">Bộ Sưu Tập 2026</span>
+      </div>
+      <h1 class="hero-title" data-reveal="fade-up" data-reveal-delay="100">
+        THỦ CÔNG TỪNG<br/>
+        <em class="gradient-text">CHẾ TÁC</em>
+      </h1>
+      <p class="hero-sub" data-reveal="fade-up" data-reveal-delay="200">
+        Sự chính xác hòa quyện cùng vẻ tinh tế. Mỗi sản phẩm được chế tác bởi sự tỉ mỉ.<br class="br-desktop"/> to transcend the ordinary.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SLIDER SECTION
+  ═══════════════════════════════════════ -->
+  <section class="slider-section" id="slider-section" aria-label="Product Showcase Slider">
+    <div class="slider-header" data-reveal="fade-up">
+      <h2 class="section-title">THƯ VIỆN <span class="gradient-text">ẢNH</span></h2>
+      <p class="section-sub">Scroll or drag to explore the collection</p>
+    </div>
+
+    <div class="slider-viewport" id="sliderViewport" role="region" aria-label="Product images slider">
+
+      <div class="slider-fade slider-fade-left" aria-hidden="true"></div>
+      <div class="slider-fade slider-fade-right" aria-hidden="true"></div>
+
+      <button class="slider-arrow slider-arrow-prev" id="sliderPrev" aria-label="Previous slide">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button class="slider-arrow slider-arrow-next" id="sliderNext" aria-label="Next slide">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <div class="slider-track" id="sliderTrack">
+
+        <div class="slide-item" data-index="0" role="img" aria-label="Product 1 — Obsidian Series">
+          <div class="slide-card">
+            <div class="slide-inner">
+              <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=480&q=85&auto=format&fit=crop"
+                   alt="Product 1 — Obsidian Series precision timepiece" loading="lazy" />
+              <div class="slide-overlay"><span class="slide-label">Obsidian Series</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-item" data-index="1" role="img" aria-label="Product 2 — Aurora Edition">
+          <div class="slide-card">
+            <div class="slide-inner">
+              <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=480&q=85&auto=format&fit=crop"
+                   alt="Product 2 — Aurora Edition athletic design" loading="lazy" />
+              <div class="slide-overlay"><span class="slide-label">Aurora Edition</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-item" data-index="2" role="img" aria-label="Product 3 — Nebula Pro">
+          <div class="slide-card">
+            <div class="slide-inner">
+              <img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=480&q=85&auto=format&fit=crop"
+                   alt="Product 3 — Nebula Pro luxury fragrance" loading="lazy" />
+              <div class="slide-overlay"><span class="slide-label">Nebula Pro</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-item" data-index="3" role="img" aria-label="Product 4 — Solaris Craft">
+          <div class="slide-card">
+            <div class="slide-inner">
+              <img src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=480&q=85&auto=format&fit=crop"
+                   alt="Product 4 — Solaris Craft laptop" loading="lazy" />
+              <div class="slide-overlay"><span class="slide-label">Solaris Craft</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-item" data-index="4" role="img" aria-label="Product 5 — Zenith Core">
+          <div class="slide-card">
+            <div class="slide-inner">
+              <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=480&q=85&auto=format&fit=crop"
+                   alt="Product 5 — Zenith Core headphones" loading="lazy" />
+              <div class="slide-overlay"><span class="slide-label">Zenith Core</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-item" data-index="5" role="img" aria-label="Product 6 — Phantom X">
+          <div class="slide-card">
+            <div class="slide-inner">
+              <img src="https://images.unsplash.com/photo-1526045612212-70caf35c14df?w=480&q=85&auto=format&fit=crop"
+                   alt="Product 6 — Phantom X camera" loading="lazy" />
+              <div class="slide-overlay"><span class="slide-label">Phantom X</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-item" data-index="6" role="img" aria-label="Product 7 — Void Studio">
+          <div class="slide-card">
+            <div class="slide-inner">
+              <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=480&q=85&auto=format&fit=crop"
+                   alt="Product 7 — Void Studio headphones" loading="lazy" />
+              <div class="slide-overlay"><span class="slide-label">Void Studio</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-item" data-index="7" role="img" aria-label="Product 8 — Eclipse One">
+          <div class="slide-card">
+            <div class="slide-inner">
+              <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=480&q=85&auto=format&fit=crop"
+                   alt="Product 8 — Eclipse One watch" loading="lazy" />
+              <div class="slide-overlay"><span class="slide-label">Eclipse One</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-item" data-index="8" role="img" aria-label="Product 9 — Apex Lens">
+          <div class="slide-card">
+            <div class="slide-inner">
+              <img src="https://images.unsplash.com/photo-1560343090-f0409e92791a?w=480&q=85&auto=format&fit=crop"
+                   alt="Product 9 — Apex Lens sunglasses" loading="lazy" />
+              <div class="slide-overlay"><span class="slide-label">Apex Lens</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-item" data-index="9" role="img" aria-label="Product 10 — Noir Vessel">
+          <div class="slide-card">
+            <div class="slide-inner">
+              <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=480&q=85&auto=format&fit=crop"
+                   alt="Product 10 — Noir Vessel sneaker" loading="lazy" />
+              <div class="slide-overlay"><span class="slide-label">Noir Vessel</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-item" data-index="10" role="img" aria-label="Product 11 — Ember Carry">
+          <div class="slide-card">
+            <div class="slide-inner">
+              <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=480&q=85&auto=format&fit=crop"
+                   alt="Product 11 — Ember Carry leather bag" loading="lazy" />
+              <div class="slide-overlay"><span class="slide-label">Ember Carry</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-item" data-index="11" role="img" aria-label="Product 12 — Flux Audio">
+          <div class="slide-card">
+            <div class="slide-inner">
+              <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=480&q=85&auto=format&fit=crop"
+                   alt="Product 12 — Flux Audio earphones" loading="lazy" />
+              <div class="slide-overlay"><span class="slide-label">Flux Audio</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-item" data-index="12" role="img" aria-label="Product 13 — Strata Chrono">
+          <div class="slide-card">
+            <div class="slide-inner">
+              <img src="https://images.unsplash.com/photo-1622557850710-b15d6f2038a6?w=480&q=85&auto=format&fit=crop"
+                   alt="Product 13 — Strata Chrono watch" loading="lazy" />
+              <div class="slide-overlay"><span class="slide-label">Strata Chrono</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-item" data-index="13" role="img" aria-label="Product 14 — Dusk Coat">
+          <div class="slide-card">
+            <div class="slide-inner">
+              <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=480&q=85&auto=format&fit=crop"
+                   alt="Product 14 — Dusk Coat jacket" loading="lazy" />
+              <div class="slide-overlay"><span class="slide-label">Dusk Coat</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-item" data-index="14" role="img" aria-label="Product 15 — Prism Stone">
+          <div class="slide-card">
+            <div class="slide-inner">
+              <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=480&q=85&auto=format&fit=crop"
+                   alt="Product 15 — Prism Stone jewellery" loading="lazy" />
+              <div class="slide-overlay"><span class="slide-label">Prism Stone</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /slider-track -->
+    </div><!-- /slider-viewport -->
+
+    <!-- Slider dots indicator -->
+    <div class="slider-dots" id="sliderDots" role="tablist" aria-label="Slide indicators"></div>
+
+    <!-- ── DIVIDER ── -->
+    <div class="s43-divider">
+      <div class="s43-divider-line"></div>
+      <span class="s43-divider-label">Khám Phá Thêm</span>
+      <div class="s43-divider-line"></div>
+    </div>
+
+    <!-- ── SLIDER 43 (auto-scroll landscape) ── -->
+    <div class="s43-outer" id="s43Outer">
+      <div class="s43-track" id="s43Track"></div>
+    </div>
+    <div class="s43-controls">
+      <button class="s43-btn s43-pause-btn" id="s43BtnPause">&#x23F8; Pause</button>
+      <button class="s43-btn" id="s43BtnFast" title="Nhanh hơn">&#x21E2;</button>
+      <div class="s43-speed-dots" id="s43SpeedDots"></div>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       DUAL BOX SECTION
+  ═══════════════════════════════════════ -->
+  <section class="dual-section" id="gallery-services" aria-label="Gallery and Services">
+    <div class="dual-grid">
+
+      <article class="dual-box" data-reveal="fade-up" data-reveal-delay="0" tabindex="0" aria-label="Gallery">
+        <div class="dual-box-glow" aria-hidden="true"></div>
+        <div class="dual-box-inner">
+          <div class="dual-icon" aria-hidden="true">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="3" width="15" height="15" rx="2" stroke="url(#iconGrad1)" stroke-width="1.5" fill="none"/>
+              <rect x="22" y="3" width="15" height="15" rx="2" stroke="url(#iconGrad1)" stroke-width="1.5" fill="none"/>
+              <rect x="3" y="22" width="15" height="15" rx="2" stroke="url(#iconGrad1)" stroke-width="1.5" fill="none"/>
+              <rect x="22" y="22" width="15" height="15" rx="2" stroke="url(#iconGrad1)" stroke-width="1.5" fill="none"/>
+              <circle cx="10.5" cy="10.5" r="3" fill="url(#iconGrad1)" opacity="0.7"/>
+              <defs>
+                <linearGradient id="iconGrad1" x1="3" y1="3" x2="37" y2="37" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#7df9ff"/>
+                  <stop offset="100%" stop-color="#4a9eff"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <h3 class="dual-title">Hồ thủy sinh theo yêu cầu</h3>
+          <p class="dual-desc">
+            Thiết kế riêng theo không gian và gu thẩm mỹ của bạn. Từng bố cục, cây thủy sinh và hệ sinh thái được chăm chút tỉ mỉ, tạo nên một tác phẩm sống hài hòa, bền vững và độc bản.
+          </p>
+          <a href="#" class="dual-link" aria-label="Explore Gallery">
+            Liên hệ ngay!
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="dual-box" data-reveal="fade-up" data-reveal-delay="120" tabindex="0" aria-label="Services">
+        <div class="dual-box-glow" aria-hidden="true"></div>
+        <div class="dual-box-inner">
+          <div class="dual-icon" aria-hidden="true">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="20" cy="20" r="16" stroke="url(#iconGrad2)" stroke-width="1.5" fill="none"/>
+              <path d="M20 12V20L25 25" stroke="url(#iconGrad2)" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="20" cy="20" r="3" fill="url(#iconGrad2)"/>
+              <defs>
+                <linearGradient id="iconGrad2" x1="4" y1="4" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#7df9ff"/>
+                  <stop offset="100%" stop-color="#4a9eff"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <h3 class="dual-title">Setup Hồ 3D</h3>
+          <p class="dual-desc">
+            Tái hiện cảnh quan sống động với bố cục đa tầng, chiều sâu rõ nét và hiệu ứng thị giác ấn tượng. Giải pháp hoàn chỉnh từ ý tưởng đến thi công, mang thiên nhiên thu nhỏ vào không gian một cách chân thực và cuốn hút.
+          </p>
+          <a href="#" class="dual-link" aria-label="View Services">
+            Liên hệ ngay!
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       ABOUT SECTION ALT (image left, text right)
+  ═══════════════════════════════════════ -->
+  <section class="about-section about-section-alt" id="about-alt" aria-label="About Alt">
+    <div class="about-bg-orb" aria-hidden="true"></div>
+
+    <div class="about-grid">
+      <div class="about-text" data-reveal="slide-right">
+        <span class="about-eyebrow">3AE Space Lab</span>
+        <h2 class="about-title">
+          Sáng tạo không giới hạn<br/>
+          <span class="gradient-text">trong từng không gian sống</span>
+        </h2>
+        <p class="about-body">
+          Chúng tôi không chỉ tạo ra những chiếc hồ thủy sinh — chúng tôi kiến tạo những thế giới thu nhỏ đầy sức sống. Mỗi dự án là một hành trình sáng tạo, nơi ý tưởng của bạn được thổi hồn vào từng viên đá, từng cây thủy sinh.
+        </p>
+        <p class="about-body">
+          Với hơn 6 năm kinh nghiệm và hơn 1.000 sản phẩm đã chạm tay khách hàng khắp 6 quốc gia, 3AE Space Lab tự hào là đơn vị tiên phong trong lĩnh vực thiết kế hồ thủy sinh nghệ thuật tại Việt Nam.
+        </p>
+        <div class="about-stats">
+          <div class="stat-item">
+            <span class="stat-number gradient-text">100%</span>
+            <span class="stat-label">Thủ Công</span>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat-item">
+            <span class="stat-number gradient-text">3D</span>
+            <span class="stat-label">Công Nghệ Setup</span>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat-item">
+            <span class="stat-number gradient-text">∞</span>
+            <span class="stat-label">Sáng Tạo</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-image-wrap" data-reveal="slide-left">
+        <div class="about-image-frame" data-parallax-about>
+          <img
+            src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=700&q=85&auto=format&fit=crop"
+            alt="Hồ thủy sinh nghệ thuật 3AE Space Lab"
+            loading="lazy"
+            class="about-img"
+          />
+          <div class="about-img-badge" aria-hidden="true">
+            <span class="badge-line1">Art.</span>
+            <span class="badge-line2">3AE</span>
+          </div>
+        </div>
+        <div class="about-float-card float-anim" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M9 1L11.5 6.5L17.5 7.5L13 12L14.5 17.5L9 14.5L3.5 17.5L5 12L0.5 7.5L6.5 6.5L9 1Z" fill="url(#starGrad2)"/>
+            <defs>
+              <linearGradient id="starGrad2" x1="0.5" y1="1" x2="17.5" y2="17.5" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#7df9ff"/>
+                <stop offset="1" stop-color="#4a9eff"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span>Thiết Kế Độc Bản - Theo Yêu Cầu</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       ABOUT SECTION
+  ═══════════════════════════════════════ -->
+  <section class="about-section" id="about" aria-label="About Luminary">
+    <div class="about-bg-orb" aria-hidden="true"></div>
+
+    <div class="about-grid">
+      <div class="about-text" data-reveal="slide-left">
+        <span class="about-eyebrow">3AE Space Lab</span>
+        <h2 class="about-title">
+          là đơn vị sáng tạo chuyên thiết kế<br/>
+          <span class="gradient-text">và thi công hồ thủy sinh</span>
+        </h2>
+        <p class="about-body">
+          theo yêu cầu, nơi nghệ thuật và tự nhiên giao thoa trong từng không gian. Chúng tôi mang đến các giải pháp độc bản: từ hồ thủy sinh cá nhân hóa, setup hồ 3D giàu chiều sâu, đến những concept Anime và landscape đầy cảm hứng.
+        </p>
+        <p class="about-body">
+          Mỗi dự án tại 3AE Space Lab được xây dựng như một "hệ sinh thái thu nhỏ" — cân bằng giữa thẩm mỹ, kỹ thuật và sự bền vững. Với sự tỉ mỉ trong từng chi tiết và tư duy thiết kế khác biệt, chúng tôi không chỉ tạo ra một chiếc hồ, mà tạo nên một trải nghiệm sống động, mang dấu ấn riêng của bạn.
+        </p>
+        <div class="about-stats">
+          <div class="stat-item">
+            <span class="stat-number gradient-text">6+</span>
+            <span class="stat-label">Năm Chế Tác</span>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat-item">
+            <span class="stat-number gradient-text">1.000</span>
+            <span class="stat-label">Sản phẩm đến tay khách hàng</span>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat-item">
+            <span class="stat-number gradient-text">6</span>
+            <span class="stat-label">Quốc gia vận chuyển</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-image-wrap" data-reveal="slide-right">
+        <div class="about-image-frame" data-parallax-about>
+          <img
+            src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=85&auto=format&fit=crop"
+            alt="Artisan at work, crafting a precision product"
+            loading="lazy"
+            class="about-img"
+          />
+          <div class="about-img-badge" aria-hidden="true">
+            <span class="badge-line1">Est.</span>
+            <span class="badge-line2">2020</span>
+          </div>
+        </div>
+        <div class="about-float-card float-anim" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M9 1L11.5 6.5L17.5 7.5L13 12L14.5 17.5L9 14.5L3.5 17.5L5 12L0.5 7.5L6.5 6.5L9 1Z" fill="url(#starGrad)"/>
+            <defs>
+              <linearGradient id="starGrad" x1="0.5" y1="1" x2="17.5" y2="17.5" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#7df9ff"/>
+                <stop offset="1" stop-color="#4a9eff"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span>Giải thưởng Sáng tạo Thủ Công - 2021</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════ -->
+  <footer class="site-footer" id="footer">
+    <div class="footer-glow-line" aria-hidden="true"></div>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="logo footer-logo" aria-label="Luminary Home">
+          <span class="logo-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 28 28" fill="none">
+              <path d="M14 2L26 14L14 26L2 14L14 2Z" stroke="url(#footerLogoGrad)" stroke-width="1.5" fill="none"/>
+              <path d="M14 7L21 14L14 21L7 14L14 7Z" fill="url(#footerLogoGrad)" opacity="0.6"/>
+              <defs>
+                <linearGradient id="footerLogoGrad" x1="2" y1="2" x2="26" y2="26" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#7df9ff"/>
+                  <stop offset="100%" stop-color="#4a9eff"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </span>
+          <span class="logo-text">3AE SPACE LAB</span>
+        </a>
+        <p class="footer-tagline">Tỉ mỉ trong từng chế tác!.</p>
+      </div>
+
+      <div class="footer-links" role="navigation" aria-label="Footer navigation">
+        <div class="footer-col">
+          <h4 class="footer-col-title">BỘ SƯU TẬP</h4>
+          <a href="#" class="footer-link">HỒ GOKU</a>
+          <a href="#" class="footer-link">HỒ LUFFY</a>
+          <a href="#" class="footer-link">HỒ LANDSCAPE</a>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-col-title">LIÊN HỆ</h4>
+          <a href="#" class="footer-link footer-social" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            Instagram
+          </a>
+          <a href="#" class="footer-link footer-social" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+            Facebook
+          </a>
+          <a href="#" class="footer-link footer-social" aria-label="TikTok">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M9 3v12a4 4 0 1 1-4-4"/>
+              <path d="M15 3c0 3 2 5 5 5"/>
+              <line x1="15" y1="3" x2="15" y2="15"/>
+            </svg>
+            TikTok
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 3AESPACELAB. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="#" class="footer-link-small">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="#" class="footer-link-small">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="#" class="footer-link-small">Cookies</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════
+       LIGHTBOX
+  ═══════════════════════════════════════ -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Full image viewer">
+    <div class="lightbox-bg" id="lightboxBg"></div>
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close lightbox">&#x2715;</button>
+    <div class="lightbox-img-wrap">
+      <img id="lightboxImg" src="" alt="" />
+      <span class="lightbox-label" id="lightboxLabel"></span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       JAVASCRIPT — load order matters:
+       1. helpers (clamp, debounce, rafThrottle)
+       2. mouse-tracker (sets window._mouse)
+       3. cursor, header, slider, scroll-reveal, lightbox, slider43
+       4. ocean-canvas (consumes window._mouse)
+  ═══════════════════════════════════════ -->
+  <script src="js/helpers.js"></script>
+  <script src="js/mouse-tracker.js"></script>
+  <script src="js/cursor.js"></script>
+  <script src="js/header.js"></script>
+  <script src="js/slider.js"></script>
+  <script src="js/scroll-reveal.js"></script>
+  <script src="js/lightbox.js"></script>
+  <script src="js/slider43.js"></script>
+  <script src="js/ocean-canvas.js"></script>
+
+</body>
+</html>
