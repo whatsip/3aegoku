@@ -1,0 +1,138 @@
+/* ─────────────────────────────────────────
+   2. CUSTOM CURSOR — 3-layer crosshair
+   Layer 1: dot      (instant, ~4px, exact)
+   Layer 2: cross    (0.22 lerp, thin lines)
+   Layer 3: reticle  (0.09 lerp, bracket corners + velocity stretch)
+───────────────────────────────────────── */
+
+/* ── Layer 1: precise dot ── */
+.cursor-dot {
+  position: fixed;
+  top: 0; left: 0;
+  width: 5px;
+  height: 5px;
+  background: var(--white);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s, width 0.2s, height 0.2s;
+  box-shadow:
+    0 0 6px  rgba(125, 249, 255, 0.9),
+    0 0 14px rgba(125, 249, 255, 0.5);
+  mix-blend-mode: screen;
+}
+
+/* ── Layer 2: crosshair lines ── */
+.cursor-cross {
+  position: fixed;
+  top: 0; left: 0;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  z-index: 9997;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s;
+}
+
+.cursor-cross::before,
+.cursor-cross::after {
+  content: '';
+  position: absolute;
+  background: rgba(125, 249, 255, 0.7);
+  border-radius: 1px;
+  top: 50%;
+  left: 50%;
+}
+
+.cursor-cross::before {
+  width: 18px;
+  height: 1px;
+  transform: translate(-50%, -50%);
+}
+
+.cursor-cross::after {
+  width: 1px;
+  height: 18px;
+  transform: translate(-50%, -50%);
+}
+
+/* ── Layer 3: outer reticle (4 corner brackets) ── */
+.cursor-ring {
+  position: fixed;
+  top: 0; left: 0;
+  width: 46px;
+  height: 46px;
+  pointer-events: none;
+  z-index: 9996;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s, width 0.25s, height 0.25s;
+}
+
+.cursor-ring::before,
+.cursor-ring::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: rgba(125, 249, 255, 0.75);
+  border-style: solid;
+  transition: border-color 0.25s, width 0.2s, height 0.2s;
+}
+
+.cursor-ring::before {
+  top: 0; left: 0;
+  border-width: 1.5px 0 0 1.5px;
+  border-radius: 1px 0 0 0;
+}
+
+.cursor-ring::after {
+  bottom: 0; right: 0;
+  border-width: 0 1.5px 1.5px 0;
+  border-radius: 0 0 1px 0;
+}
+
+.cursor-ring-tl,
+.cursor-ring-tr,
+.cursor-ring-bl,
+.cursor-ring-br {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: rgba(125, 249, 255, 0.75);
+  border-style: solid;
+  pointer-events: none;
+  transition: border-color 0.25s, width 0.2s, height 0.2s;
+}
+
+.cursor-ring-tr {
+  top: 0; right: 0;
+  border-width: 1.5px 1.5px 0 0;
+  border-radius: 0 1px 0 0;
+}
+
+.cursor-ring-bl {
+  bottom: 0; left: 0;
+  border-width: 0 0 1.5px 1.5px;
+  border-radius: 0 0 0 1px;
+}
+
+.cursor-dot.cursor-hover {
+  width: 7px;
+  height: 7px;
+  background: var(--accent-cyan);
+}
+
+.cursor-ring.cursor-hover,
+.cursor-ring.cursor-hover::before,
+.cursor-ring.cursor-hover::after,
+.cursor-ring.cursor-hover .cursor-ring-tr,
+.cursor-ring.cursor-hover .cursor-ring-bl {
+  border-color: var(--accent-cyan);
+  width: 13px;
+  height: 13px;
+}
+
+.cursor-ring.cursor-hover {
+  box-shadow: 0 0 20px rgba(125, 249, 255, 0.15);
+}

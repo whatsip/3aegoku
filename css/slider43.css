@@ -1,0 +1,190 @@
+/* ─────────────────────────────────────────
+   SLIDER 43 — auto-scroll landscape slider
+───────────────────────────────────────── */
+.s43-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 var(--section-px);
+  margin: 4px 0 6px;
+}
+
+.s43-divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(125,249,255,0.25), transparent);
+}
+
+.s43-divider-label {
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(125, 249, 255, 0.55);
+  white-space: nowrap;
+}
+
+.s43-outer {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.s43-outer::before,
+.s43-outer::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  z-index: 10;
+  pointer-events: none;
+  width: clamp(50px, 7vw, 110px);
+}
+
+.s43-outer::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(5,8,22,0.95) 0%, transparent 100%);
+}
+
+.s43-outer::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(5,8,22,0.95) 0%, transparent 100%);
+}
+
+.s43-track {
+  display: flex;
+  gap: 10px;
+  padding: 18px 10px 22px;
+  width: max-content;
+  will-change: transform;
+}
+
+.s43-card {
+  --s43-card-w: clamp(140px, calc((100vw - 6 * 10px) / 5.2), 210px);
+  --s43-card-h: calc(var(--s43-card-w) * 3 / 4);
+  flex: 0 0 var(--s43-card-w);
+  width: var(--s43-card-w);
+  height: var(--s43-card-h);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.45s cubic-bezier(0.23,1,0.32,1),
+              box-shadow 0.45s cubic-bezier(0.23,1,0.32,1);
+  box-shadow:
+    0 4px 20px rgba(0,0,0,0.5),
+    inset 0 0 0 1px rgba(255,255,255,0.07);
+}
+
+.s43-card:hover {
+  transform: scale(1.07) translateY(-8px) rotateX(3deg);
+  box-shadow:
+    0 0 0 1.5px rgba(125,249,255,0.6),
+    0 0 30px 4px rgba(125,249,255,0.2),
+    0 0 70px 16px rgba(74,158,255,0.12),
+    0 16px 50px rgba(0,0,0,0.6);
+  z-index: 20;
+}
+
+.s43-card-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.23,1,0.32,1);
+}
+
+.s43-card:hover .s43-card-img { transform: scale(1.08); }
+
+.s43-card-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(160deg, transparent 40%, rgba(0,0,10,0.7) 100%);
+  pointer-events: none;
+}
+
+.s43-card-label {
+  position: absolute;
+  bottom: 12px; left: 14px; right: 14px;
+  font-family: var(--font-display);
+  font-size: clamp(0.75rem, 1.3vw, 1.1rem);
+  letter-spacing: 0.04em;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.9);
+  transform: translateY(4px);
+  transition: transform 0.4s ease;
+  pointer-events: none;
+}
+
+.s43-card:hover .s43-card-label { transform: translateY(0); }
+
+.s43-card-num {
+  position: absolute; top: 10px; right: 12px;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.35);
+  pointer-events: none;
+}
+
+.s43-controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+  padding: 0 var(--section-px) 0;
+  margin-top: 4px;
+}
+
+.s43-btn {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--white-80);
+  font-size: 0.95rem;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.s43-btn:hover {
+  background: rgba(125,249,255,0.12);
+  border-color: rgba(125,249,255,0.5);
+  box-shadow: 0 0 14px rgba(125,249,255,0.25);
+  transform: scale(1.08);
+}
+
+.s43-pause-btn {
+  width: auto;
+  padding: 0 18px;
+  border-radius: 40px;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+.s43-pause-btn.active {
+  background: rgba(125,249,255,0.15);
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+}
+
+.s43-speed-dots {
+  display: flex; gap: 5px; align-items: center;
+}
+
+.s43-speed-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.18);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.s43-speed-dot.active {
+  background: var(--accent-cyan);
+  transform: scale(1.3);
+}
