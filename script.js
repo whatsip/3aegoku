@@ -300,31 +300,40 @@ const _sliderReady = new Promise(res => { _sliderReadyResolve = res; });
   const realCount = realItems.length;
 
   /* ── Build clone sets for infinite loop ──
-     Layout: [clonesBefore × realCount] [real × realCount] [clonesAfter × realCount]
-     Indices: 0 … realCount-1 | realCount … 2*realCount-1 | 2*realCount … 3*realCount-1
+     BUFFER sets on each side so rapid navigation never runs out of clones.
+     Layout: [BUFFER × realCount] [real × realCount] [BUFFER × realCount]
+     Buffer is at least 5, or enough to cover 20 rapid clicks worth.
   */
-  const clonesBefore = realItems.map(el => {
-    const cl = el.cloneNode(true);
-    cl.setAttribute('aria-hidden', 'true');
-    cl.removeAttribute('data-index');
-    return cl;
-  });
-  const clonesAfter = realItems.map(el => {
-    const cl = el.cloneNode(true);
-    cl.setAttribute('aria-hidden', 'true');
-    cl.removeAttribute('data-index');
-    return cl;
-  });
+  const BUFFER = Math.max(5, Math.ceil(20 / Math.max(realCount, 1)));
 
-  clonesBefore.forEach(cl => track.insertBefore(cl, track.firstChild));
-  clonesAfter.forEach(cl  => track.appendChild(cl));
+  // Prepend BUFFER clone sets before the real items (in order)
+  const beforeFrag = document.createDocumentFragment();
+  for (let b = 0; b < BUFFER; b++) {
+    realItems.forEach(el => {
+      const cl = el.cloneNode(true);
+      cl.setAttribute('aria-hidden', 'true');
+      cl.removeAttribute('data-index');
+      beforeFrag.appendChild(cl);
+    });
+  }
+  track.insertBefore(beforeFrag, track.firstChild);
+
+  // Append BUFFER clone sets after the real items
+  for (let b = 0; b < BUFFER; b++) {
+    realItems.forEach(el => {
+      const cl = el.cloneNode(true);
+      cl.setAttribute('aria-hidden', 'true');
+      cl.removeAttribute('data-index');
+      track.appendChild(cl);
+    });
+  }
 
   /* ── Re-query all items (originals + clones) ── */
   const items      = Array.from(track.querySelectorAll('.slide-item'));
-  const totalItems = items.length; // realCount × 3
+  const totalItems = items.length; // realCount × (2*BUFFER + 1)
 
   /* Start at the first item of the MIDDLE (real) set so clones fill both sides */
-  let centerIndex = realCount;
+  let centerIndex = realCount * BUFFER;
 
   /* ── Helpers ── */
   function getSlideMetrics() {
@@ -336,7 +345,7 @@ const _sliderReady = new Promise(res => { _sliderReadyResolve = res; });
 
   /** Logical index within the real set (for dots). */
   function logicalIndex() {
-    return ((centerIndex - realCount) % realCount + realCount) % realCount;
+    return ((centerIndex - realCount * BUFFER) % realCount + realCount) % realCount;
   }
 
   /* ── Dots ── */
@@ -403,32 +412,56 @@ const _sliderReady = new Promise(res => { _sliderReadyResolve = res; });
   }
 
   /* ── Infinite-wrap check (runs after transition ends) ──
-     If centerIndex drifted into clone territory, silently
-     jump to the equivalent real index.
+     Uses transitionend for precise timing; a fallback timeout covers
+     cases where the event doesn't fire (e.g. display:none).
+     If centerIndex drifted out of the middle real-set, silently
+     jump by one realCount step toward the centre.
   */
-  let wrapTimer = null;
+  let isWrapping  = false;
+  let wrapTimer   = null;
+
+  function doWrap() {
+    if (isWrapping) return;
+    const lo = realCount * BUFFER;        // first index of real set
+    const hi = realCount * (BUFFER + 1);  // first index of post-real clones
+    if (centerIndex < lo) {
+      isWrapping = true;
+      centerIndex += realCount;
+      render(false);
+      isWrapping = false;
+    } else if (centerIndex >= hi) {
+      isWrapping = true;
+      centerIndex -= realCount;
+      render(false);
+      isWrapping = false;
+    }
+  }
+
   function scheduleWrapCheck() {
     clearTimeout(wrapTimer);
-    wrapTimer = setTimeout(() => {
-      if (centerIndex < realCount) {
-        centerIndex += realCount;
-        render(false);
-      } else if (centerIndex >= realCount * 2) {
-        centerIndex -= realCount;
-        render(false);
-      }
-    }, 700); // wait for CSS transition (0.65s) to finish
+    // Primary: fire as soon as the CSS transition completes
+    track.addEventListener('transitionend', function onEnd(e) {
+      if (e.propertyName !== 'transform') return;
+      track.removeEventListener('transitionend', onEnd);
+      clearTimeout(wrapTimer);
+      doWrap();
+    });
+    // Fallback: in case transitionend doesn't fire (hidden element, etc.)
+    wrapTimer = setTimeout(doWrap, 750);
   }
 
   /* ── Navigation ── */
   function goTo(index) {
-    centerIndex = index;
+    // Hard-clamp: never go beyond the available cloned items
+    const minIdx = 0;
+    const maxIdx = totalItems - 1;
+    centerIndex = Math.min(Math.max(index, minIdx), maxIdx);
     render(true);
     scheduleWrapCheck();
   }
 
   function goToReal(realIdx) {
-    centerIndex = realCount + realIdx;
+    centerIndex = realCount * BUFFER + realIdx;
     render(true);
     scheduleWrapCheck();
   }
